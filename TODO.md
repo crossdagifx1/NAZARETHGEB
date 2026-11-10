@@ -10,4 +10,4 @@
 - [x] **Clergy** — A section indicates that clergy names are not shown in the available public listing and directs visitors to contact the parish.
 - [x] **Parish news** — A section indicates that no verified official announcements were available and points visitors to the public listing.
 - [x] **Visiting information** — A section gives the Adama location, map directions, and practical visitor guidance without inventing phone or service details.
-- [ ] **Permanent publication** — Publish the website on stable public hosting and verify that the published URL responds successfully.
+- [x] **Permanent publication** — The website is published at https://gabriel-cupgic92.manus.space and the URL, gallery images, and route manifest were verified successfully.
