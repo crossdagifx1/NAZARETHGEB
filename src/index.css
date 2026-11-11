@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=UnifrakturMaguntia&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans+Ethiopic:wght@400;500;600;700&family=Noto+Serif+Ethiopic:wght@400;500;600;700&family=UnifrakturMaguntia&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -26,6 +26,19 @@ body {
     radial-gradient(circle at 80% 80%, rgba(184, 137, 43, .15), transparent 50%),
     repeating-linear-gradient(45deg, rgba(0,0,0,.08) 0 2px, transparent 2px 6px);
   font-size: 1.125rem;
+}
+
+html[lang="am"] body {
+  font-family: 'Noto Serif Ethiopic', 'Nyala', serif;
+  line-height: 1.75;
+}
+
+html[lang="am"] .font-deco,
+html[lang="am"] .font-cinzel,
+html[lang="am"] .font-garamond,
+html[lang="am"] .font-old {
+  font-family: 'Noto Sans Ethiopic', 'Nyala', sans-serif;
+  letter-spacing: normal;
 }
 
 .parchment {
@@ -59,6 +72,10 @@ body {
   padding: .3rem .6rem .1rem 0;
   color: var(--color-crimson);
   text-shadow: 2px 2px 0 var(--color-gold-light);
+}
+
+html[lang="am"] .drop-cap::first-letter {
+  font-family: 'Noto Sans Ethiopic', 'Nyala', sans-serif;
 }
 
 .sepia-img { filter: sepia(.35) contrast(1.05) saturate(.9); }
