@@ -14,17 +14,6 @@ const GALLERY_ITEMS = [
   { image: "gallery/photo_09.jpg", title: "photo09Title", alt: "photo09Alt" },
 ] as const;
 
-const FEAST_ITEMS = [
-  { date: "dateJan7", name: "feastNativity" },
-  { date: "dateJan19", name: "feastTheophany" },
-  { date: "dateFeb15", name: "feastMeeting" },
-  { date: "dateApr7", name: "feastAnnunciation" },
-  { date: "dateAug19", name: "feastTransfiguration" },
-  { date: "dateAug28", name: "feastDormition" },
-  { date: "dateSep21", name: "feastTheotokosNativity" },
-  { date: "dateSep27", name: "feastCross" },
-] as const;
-
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [language, setLanguage] = useState<Language>("en");
@@ -49,10 +38,6 @@ export default function App() {
     image: photo.image,
     title: t[photo.title],
     alt: t[photo.alt],
-  }));
-  const feasts = FEAST_ITEMS.map((feast) => ({
-    date: t[feast.date],
-    name: t[feast.name],
   }));
   const clergy = [{ name: t.clergyName, role: t.clergyRole, bio: t.clergyBio }];
   const news = [{ date: t.newsDate, title: t.newsItemTitle, text: t.newsText }];
@@ -189,16 +174,38 @@ export default function App() {
       <section id="services" className="relative py-20 px-4">
         <img src="/images/interior.jpg" alt="" className="absolute inset-0 w-full h-full object-cover sepia-img opacity-30" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#2a1608]/80 to-[#1a0d04]/90" />
-        <div className="relative max-w-5xl mx-auto">
+        <div className="relative max-w-6xl mx-auto">
           <SectionTitle kicker={t.serviceKicker} title={t.serviceTitle} light />
-          <div className="parchment relative p-6 sm:p-10 ornate-frame text-center">
-            <Corner className="top-1 left-1" />
-            <Corner className="top-1 right-1 rotate-90" />
-            <Corner className="bottom-1 right-1 rotate-180" />
-            <Corner className="bottom-1 left-1 -rotate-90" />
-            <h3 className="font-deco text-2xl text-crimson">{t.serviceTimes}</h3>
-            <p className="max-w-2xl mx-auto italic mt-4 text-ink/80">{t.serviceUnavailable}</p>
-            <a href={MAPS_URL} target="_blank" rel="noreferrer" className="inline-block font-cinzel text-sm text-crimson mt-5 tracking-widest underline hover:text-crimson-dark">{t.publicChurchListing}</a>
+          <div className="grid lg:grid-cols-3 gap-8 items-stretch">
+            <div className="lg:col-span-2 parchment border-2 border-gold shadow-2xl p-5 sm:p-8">
+              <div className="divide-y divide-gold/50 border-y border-gold/70">
+                {[
+                  { day: t.serviceDaySunday, name: t.serviceSundayName, time: "5:00 AM – 9:00 AM" },
+                  { day: t.serviceDayWeekdays, name: t.serviceMorningName, time: "6:00 AM – 6:30 AM" },
+                  { day: t.serviceDayMonthly, name: t.serviceMonthlyName, time: "12:00 AM – 9:00 AM" },
+                  { day: t.serviceDayEves, name: t.serviceVigilName, time: t.serviceTimeConfirm },
+                ].map((service) => (
+                  <div key={service.day} className="grid sm:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)_auto] gap-2 sm:gap-5 items-center py-4">
+                    <span className="font-cinzel text-xs sm:text-sm font-bold uppercase tracking-wide text-crimson">{service.day}</span>
+                    <span className="font-semibold leading-snug">{service.name}</span>
+                    <span className="font-cinzel text-sm text-right sm:whitespace-nowrap">{service.time}</span>
+                  </div>
+                ))}
+              </div>
+              <a href={MAPS_URL} target="_blank" rel="noreferrer" className="block text-center font-cinzel text-sm text-crimson mt-5 tracking-widest underline hover:text-crimson-dark">{t.publicChurchListing}</a>
+            </div>
+
+            <aside className="border-2 border-gold bg-[#190b04]/90 text-parchment p-6 sm:p-8 text-center flex flex-col items-center justify-center shadow-xl">
+              <p className="font-cinzel text-xs tracking-[.2em] text-gold-light">{t.upcomingAnnualLabel}</p>
+              <div className="mt-4 border border-gold w-24 shadow-lg">
+                <div className="bg-gold text-[#2a1608] font-cinzel text-xs uppercase py-1">{t.upcomingAnnualMonth}</div>
+                <div className="bg-crimson-dark text-parchment text-4xl font-deco py-2">{t.upcomingAnnualDay}</div>
+              </div>
+              <h3 className="font-deco text-xl sm:text-2xl mt-4">{t.upcomingAnnualTitle}</h3>
+              <p className="mt-2 text-parchment/80">{t.upcomingAnnualDate}</p>
+              <p className="mt-1 text-sm italic text-parchment/70">{t.upcomingAnnualProgram}</p>
+              <a href="#calendar" className="mt-5 w-full bg-gold text-[#2a1608] font-cinzel text-xs tracking-widest uppercase px-4 py-3 hover:bg-gold-light transition">{t.seeEventDetails}</a>
+            </aside>
           </div>
         </div>
       </section>
@@ -209,31 +216,50 @@ export default function App() {
       <section id="calendar" className="parchment py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <SectionTitle kicker={t.calendarKicker} title={t.calendarTitle} />
-          <div className="grid lg:grid-cols-3 gap-10">
-            <div className="lg:col-span-2">
-              <div className="border-4 border-double border-crimson bg-parchment-dark/40 p-6 mb-6 text-center">
-                <p className="font-cinzel text-sm tracking-widest text-crimson">{t.churchNamedFor}</p>
-                <h3 className="font-deco text-2xl sm:text-3xl my-2">{t.saintGabrielArchangel}</h3>
-                <p className="italic">{t.archangelDescription}</p>
+          <div className="grid lg:grid-cols-2 gap-8 items-stretch">
+            <article className="border-4 border-double border-crimson bg-parchment-dark/40 p-6 sm:p-8 flex flex-col justify-center">
+              <p className="font-cinzel text-xs tracking-[.18em] uppercase text-crimson">{t.nextMonthlyLabel}</p>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-5 mt-4">
+                <div className="shrink-0 w-24 border-2 border-crimson text-center shadow-md">
+                  <div className="bg-crimson text-parchment font-cinzel text-xs uppercase py-1">{t.nextMonthlyMonth}</div>
+                  <div className="bg-parchment text-crimson-dark font-deco text-4xl py-2">{t.nextMonthlyDay}</div>
+                </div>
+                <div>
+                  <h3 className="font-deco text-2xl sm:text-3xl">{t.nextMonthlyLabel}</h3>
+                  <p className="font-semibold mt-2">{t.nextMonthlyDate}</p>
+                  <p className="mt-2 text-ink/80">{t.nextMonthlyDescription}</p>
+                </div>
               </div>
-              <p className="italic mb-4 text-ink/70">{t.calendarDisclaimer}</p>
-              <ul className="divide-y divide-crimson/30 border-y-2 border-crimson/50">
-                {feasts.map((feast) => (
-                  <li key={`${feast.date}-${feast.name}`} className="flex items-center gap-4 py-3 hover:bg-parchment-dark/50 px-2 transition">
-                    <span className="font-cinzel font-bold text-crimson w-24 shrink-0">{feast.date}</span>
-                    <OrthodoxCross className="h-5 w-3 text-gold shrink-0" />
-                    <span className="font-semibold flex-1">{feast.name}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+              <div className="mt-6 border-t border-crimson/30 pt-4">
+                <p className="font-cinzel text-xs tracking-widest text-crimson">{t.churchNamedFor}</p>
+                <p className="font-semibold">{t.saintGabrielArchangel} <span className="font-normal italic">— {t.archangelDescription}</span></p>
+              </div>
+            </article>
 
-            <aside className="bg-[#1e0f05] text-parchment p-6 ornate-frame text-center relative">
-              <h3 className="font-deco gold-text text-2xl">{t.prayerTitle}</h3>
-              <p className="italic text-parchment/80 mt-3 text-base">{t.prayerText}</p>
-              <a href={MAPS_URL} target="_blank" rel="noreferrer" className="inline-block font-cinzel text-sm underline text-gold-light mt-5">{t.openListing}</a>
-            </aside>
+            <div className="border-y-2 border-crimson/60 divide-y divide-crimson/20 self-center">
+              {[
+                { date: t.eventMonthlyDate, calendar: t.eventMonthlyCalendar, title: t.eventMonthlyTitle },
+                { date: t.eventAnnualDate, calendar: t.eventAnnualCalendar, title: t.eventAnnualTitle },
+              ].map((event) => (
+                <article key={event.calendar} className="grid grid-cols-[5rem_1rem_1fr] sm:grid-cols-[6rem_1rem_1fr] gap-3 items-center py-4">
+                  <div>
+                    <p className="font-cinzel font-bold text-crimson">{event.date}</p>
+                    <p className="text-xs text-ink/70">{event.calendar}</p>
+                  </div>
+                  <OrthodoxCross className="h-5 w-3 text-gold" />
+                  <h3 className="font-semibold">{event.title}</h3>
+                </article>
+              ))}
+              <div className="py-4 text-sm italic text-ink/70">{t.eventDetailsNote}</div>
+            </div>
           </div>
+          <aside className="mt-8 bg-[#1e0f05] text-parchment p-6 border-l-4 border-gold flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h3 className="font-deco text-xl text-gold-light">{t.prayerTitle}</h3>
+              <p className="italic text-parchment/80 mt-2 text-base">{t.prayerText}</p>
+            </div>
+            <a href={MAPS_URL} target="_blank" rel="noreferrer" className="shrink-0 font-cinzel text-sm underline text-gold-light">{t.eventOpenListing}</a>
+          </aside>
         </div>
       </section>
 
