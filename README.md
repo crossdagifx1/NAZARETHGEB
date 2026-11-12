@@ -10,7 +10,7 @@ The interface pairs an Ethiopian Orthodox visual identity—parchment background
 
 - **Bilingual experience:** English and Amharic content and navigation.
 - **Parish information:** Church introduction, Adama location, map directions, and practical visitor guidance.
-- **Photo gallery:** Seven church-listing photos with translated captions and accessible descriptions.
+- **Photo gallery:** Seven church-listing photographs with translated captions and accessible descriptions.
 - **Service schedule:** Responsive timetable with the supplied regular services and a clear note where vigil times are still to be confirmed.
 - **Feasts and events:** A highlighted monthly feast and annual Feast of St Gabriel, with programme details marked for confirmation. Example events from the design reference are not presented as real events.
 - **Responsive presentation:** Layouts designed for desktop and mobile screens.
@@ -68,4 +68,4 @@ Designed and developed by **[Dagmawi Amare](https://checkits.my.id)**.
 
 ## License
 
-No license file is currently included. All rights remain with their respective owners; please request permission before reusing project code or photography.
+The project code and photographs, as identified by the project owner, are released under the [MIT License](LICENSE). See the license file for the full terms.
