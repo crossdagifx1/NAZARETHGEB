@@ -1,7 +1,71 @@
-# Saint Gabriel Church website
+# Saint Gabriel Church — Adama, Ethiopia
 
-Rebranded from the supplied Orthodox church template for Saint Gabriel Church in Adama, Ethiopia.
+A responsive bilingual website for Saint Gabriel Church in Adama, Ethiopia. The site presents the parish, its location and visitor information, a church photo gallery, and service and feast details in English and Amharic.
 
-The site offers English and Amharic modes through the language control in the header. It uses seven photos from the church's public Google Maps listing and omits the selected church-and-community photo from all placements. The browsable gallery, Adama location/map, visitor guidance, and parish information remain available in both languages. The service and feast sections use the supplied schedule and date details in two responsive layouts; the schedule marks major-feast vigil times and the annual programme as unconfirmed. Entries identified as samples were excluded. Clergy and news copy distinguishes missing public information from confirmed parish details.
+## Project overview
 
-Run `npm ci` and `npm run dev` for local development. `npm run build` creates the static site in `dist/` for publication.
+The interface pairs an Ethiopian Orthodox visual identity—parchment backgrounds, crimson and gold accents, decorative cross motifs, and classical typography—with a mobile-friendly layout. Visitors can switch languages from the header; the selected language updates the page copy, image descriptions, document title, and document language.
+
+## Features
+
+- **Bilingual experience:** English and Amharic content and navigation.
+- **Parish information:** Church introduction, Adama location, map directions, and practical visitor guidance.
+- **Photo gallery:** Seven church-listing photos with translated captions and accessible descriptions.
+- **Service schedule:** Responsive timetable with the supplied regular services and a clear note where vigil times are still to be confirmed.
+- **Feasts and events:** A highlighted monthly feast and annual Feast of St Gabriel, with programme details marked for confirmation. Example events from the design reference are not presented as real events.
+- **Responsive presentation:** Layouts designed for desktop and mobile screens.
+
+Service and feast details reflect the information supplied for the site. Visitors should confirm current service arrangements and event programmes with the parish.
+
+## Technology
+
+- React 19 and TypeScript
+- Vite 7
+- Tailwind CSS 4
+- `vite-plugin-singlefile` for a self-contained static build
+- OpenStreetMap embed for the location map
+
+## Run locally
+
+Requires Node.js and npm.
+
+```bash
+npm ci
+npm run dev
+```
+
+To create and preview a production build:
+
+```bash
+npm run build
+npm run preview
+```
+
+The static build is written to `dist/`.
+
+## Deployment
+
+The project is configured for static deployment from the `main` branch through Vercel. A successful production build can also be hosted by any static web host that serves the generated `dist/` output.
+
+## Project structure
+
+```text
+src/
+  App.tsx          Main page sections and responsive layouts
+  Ornaments.tsx    Reusable decorative church-themed elements
+  translations.ts  English and Amharic interface copy
+  index.css        Global styles and design tokens
+public/
+  images/          Optimized church and gallery photography
+  manus-routes.json
+index.html          Document shell and page metadata
+vite.config.ts      Vite, React, Tailwind, and single-file build setup
+```
+
+## Developer
+
+Designed and developed by **[Dagmawi Amare](https://checkits.my.id)**.
+
+## License
+
+No license file is currently included. All rights remain with their respective owners; please request permission before reusing project code or photography.
